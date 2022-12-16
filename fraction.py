@@ -128,7 +128,7 @@ class Fraction:
         POST : Return True if the 2 fractions passed in parameters are equal, return False otherwise
 
         """
-        return (self.__num == other.__num) and (self.__den == other.__den)
+        return self.__num / self.__den == other.__num / other.__den
 
     def __float__(self):
         """Returns the decimal value of the fraction
