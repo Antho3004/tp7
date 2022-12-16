@@ -43,6 +43,8 @@ class Fraction:
             return "The reduced form of the fraction is " + str(self.__num)
         elif self.__num < 0 and self.__den < 0:
             return "The reduced form of the fraction is " + str(abs(self.__num)) + "/" + str(abs(self.__den))
+        elif self.__num > 0 > self.__den:
+            return "The reduced form of the fraction is -" + str(self.__num) + "/" + str(abs(self.__den))
         else:
             return "The reduced form of the fraction is " + str(self.__num) + "/" + str(self.__den)
 
