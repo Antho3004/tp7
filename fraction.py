@@ -57,13 +57,13 @@ class Fraction:
         POST : a string that represents the reduced of the fraction as a mixed number
         """
         if self.is_zero():
-            return "The reduced form of the fraction as a mixed number is 0."
+            return "The reduced form of the fraction as a mixed number is 0"
         else:
             number_float = (self.__num / self.__den)
             whole_number = math.floor(number_float)
             new_num = self.__num - (self.__den * whole_number)
             return "The reduced form of the fraction as a mixed number is " + str(whole_number) + " + " + str(
-                new_num) + "/" + str(self.__den)
+                abs(new_num)) + "/" + str(abs(self.__den))
 
     # ------------------ Operators overloading ------------------
 
