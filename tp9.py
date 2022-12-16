@@ -29,8 +29,10 @@ class test_fraction(unittest.TestCase):
         self.assertEqual(Fraction(-15, 7).__str__(), "The reduced form of the fraction is -15/7")
         self.assertEqual(Fraction(15, -7).__str__(), "The reduced form of the fraction is -15/7")
         self.assertEqual(Fraction(0, 7).__str__(), "The reduced form of the fraction is 0")
-        self.assertRaises(ZeroDivisionError, Fraction, 15, 0)
-        self.assertRaises(ZeroDivisionError, Fraction, 0, 0)
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(15, 0).__str__()
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(0, 0).__str__()
 
     def test_as_mixed_number(self):
         self.assertEqual(Fraction(5, 2).as_mixed_number(), "The reduced form of the fraction as a mixed number is 2 + "
@@ -42,8 +44,10 @@ class test_fraction(unittest.TestCase):
         self.assertEqual(Fraction(5, -2).as_mixed_number(), "The reduced form of the fraction as a mixed number is -3 "
                                                             "+ 1/2")
         self.assertEqual(Fraction(0, 2).as_mixed_number(), "The reduced form of the fraction as a mixed number is 0")
-        self.assertRaises(ZeroDivisionError, Fraction, 5, 0)
-        self.assertRaises(ZeroDivisionError, Fraction, 0, 0)
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(5, 0).as_mixed_number()
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(0, 0).as_mixed_number()
 
     def test_add(self):
         calcul1 = Fraction(3, 5) + Fraction(4, 7)
@@ -140,6 +144,75 @@ class test_fraction(unittest.TestCase):
         self.assertTrue(calcul5)
         calcul6 = Fraction(7, 5) == Fraction(1, 10)
         self.assertFalse(calcul6)
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(1, 0).__eq__(Fraction(5, 0))
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(0, 0).__eq__(Fraction(0, 0))
+
+    def test_float(self):
+        self.assertEqual(Fraction(1, 4).__float__(), 0.25)
+        self.assertEqual(Fraction(-1, -4).__float__(), 0.25)
+        self.assertEqual(Fraction(-1, 4).__float__(), -0.25)
+        self.assertEqual(Fraction(1, -4).__float__(), -0.25)
+        self.assertEqual(Fraction(0, 4).__float__(), 0)
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(1, 0).__float__()
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(0, 0).__float__()
+
+    def test_is_zero(self):
+        self.assertFalse(Fraction(2, 6).is_zero())
+        self.assertFalse(Fraction(-2, -6).is_zero())
+        self.assertFalse(Fraction(-2, 6).is_zero())
+        self.assertFalse(Fraction(2, -6).is_zero())
+        self.assertTrue(Fraction(0, 6).is_zero())
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(2, 0).is_zero()
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(0, 0).is_zero()
+
+    def test_is_integer(self):
+        self.assertTrue(Fraction(4, 2).is_integer())
+        self.assertTrue(Fraction(-4, -2).is_integer())
+        self.assertTrue(Fraction(-4, 2).is_integer())
+        self.assertTrue(Fraction(4, -2).is_integer())
+        self.assertFalse(Fraction(3, 2).is_integer())
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(1, 0).is_integer()
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(0, 0).is_integer()
+
+    def test_is_proper(self):
+        self.assertTrue(Fraction(4, 7).is_proper())
+        self.assertTrue(Fraction(-4, -7).is_proper())
+        self.assertTrue(Fraction(-4, 7).is_proper())
+        self.assertTrue(Fraction(4, -7).is_proper())
+        self.assertFalse(Fraction(4, 2).is_proper())
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(1, 0).is_proper()
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(0, 0).is_proper()
+
+    def test_is_unit(self):
+        self.assertTrue(Fraction(5, 5).is_unit())
+        self.assertFalse(Fraction(-3, 5).is_unit())
+        self.assertFalse(Fraction(4, 2).is_unit())
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(1, 0).is_unit()
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(0, 0).is_unit()
+
+    def test_adjacent_to(self):
+        self.assertTrue(Fraction(1, 4).is_adjacent_to(Fraction(1, 6)))
+        self.assertTrue(Fraction(-1, -4).is_adjacent_to(Fraction(-1, -6)))
+        self.assertTrue(Fraction(-1, 4).is_adjacent_to(Fraction(-1, 6)))
+        self.assertTrue(Fraction(1, -4).is_adjacent_to(Fraction(-1, 6)))
+        self.assertFalse(Fraction(0, 4).is_adjacent_to(Fraction(0, 6)))
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(1, 0).is_adjacent_to(Fraction(1, 0))
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(0, 0).is_adjacent_to(Fraction(0, 0))
+
 
 
 
