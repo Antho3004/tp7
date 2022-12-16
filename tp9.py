@@ -73,9 +73,9 @@ class test_fraction(unittest.TestCase):
         calcul4 = Fraction(0, 4) - Fraction(0, 6)
         self.assertEqual(str(calcul4), "The reduced form of the fraction is 0")
         with self.assertRaises(ZeroDivisionError):
-            Fraction(10, 0) + Fraction(5, 0)
+            Fraction(10, 0) - Fraction(5, 0)
         with self.assertRaises(ZeroDivisionError):
-            Fraction(0, 0) + Fraction(0, 0)
+            Fraction(0, 0) - Fraction(0, 0)
 
     def test_mul(self):
         calcul1 = Fraction(6, 3) * Fraction(2, 5)
@@ -89,7 +89,59 @@ class test_fraction(unittest.TestCase):
         calcul5 = Fraction(0, 3) * Fraction(0, 5)
         self.assertEqual(str(calcul5), "The reduced form of the fraction is 0")
         with self.assertRaises(ZeroDivisionError):
-            Fraction(6, 0) + Fraction(2, 0)
+            Fraction(6, 0) * Fraction(2, 0)
         with self.assertRaises(ZeroDivisionError):
-            Fraction(0, 0) + Fraction(0, 0)
+            Fraction(0, 0) * Fraction(0, 0)
+
+    def test_truediv(self):
+        calcul1 = Fraction(2, 3) / Fraction(5, 7)
+        self.assertEqual(str(calcul1), "The reduced form of the fraction is 14/15")
+        calcul2 = Fraction(-2, -3) / Fraction(-5, -7)
+        self.assertEqual(str(calcul2), "The reduced form of the fraction is 14/15")
+        calcul3 = Fraction(-2, 3) / Fraction(-5, 7)
+        self.assertEqual(str(calcul3), "The reduced form of the fraction is 14/15")
+        calcul4 = Fraction(2, -3) / Fraction(5, -7)
+        self.assertEqual(str(calcul4), "The reduced form of the fraction is 14/15")
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(0, 3) / Fraction(0, 7)
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(2, 0) / Fraction(5, 0)
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(0, 0) / Fraction(0, 0)
+
+    def test_pow(self):
+        calcul1 = Fraction(4, 5) ** 2
+        self.assertEqual(str(calcul1), "The reduced form of the fraction is 16/25")
+        calcul2 = Fraction(-4, -5) ** 2
+        self.assertEqual(str(calcul2), "The reduced form of the fraction is 16/25")
+        calcul3 = Fraction(-4, 5) ** 2
+        self.assertEqual(str(calcul3), "The reduced form of the fraction is 16/25")
+        calcul4 = Fraction(4, -5) ** 2
+        self.assertEqual(str(calcul4), "The reduced form of the fraction is 16/25")
+        calcul5 = Fraction(0, 5) ** 2
+        self.assertEqual(str(calcul5), "The reduced form of the fraction is 0")
+        calcul5 = Fraction(4, 5) ** 0
+        self.assertEqual(str(calcul5), "1")
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(4, 0) ** 2
+        with self.assertRaises(ZeroDivisionError):
+            Fraction(0, 0) ** 0
+
+    def test_eq(self):
+        calcul1 = Fraction(4, 5) == Fraction(8, 10)
+        self.assertTrue(calcul1)
+        calcul2 = Fraction(-4, -5) == Fraction(-8, -10)
+        self.assertTrue(calcul2)
+        calcul3 = Fraction(-4, 5) == Fraction(8, -10)
+        self.assertTrue(calcul3)
+        calcul4 = Fraction(4, -5) == Fraction(-8, 10)
+        self.assertTrue(calcul4)
+        calcul5 = Fraction(0, 5) == Fraction(0, 10)
+        self.assertTrue(calcul5)
+        calcul6 = Fraction(7, 5) == Fraction(1, 10)
+        self.assertFalse(calcul6)
+
+
+
+
 
