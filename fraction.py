@@ -9,11 +9,11 @@ class Fraction:
     This class allows fraction manipulations through several operations.
     """
 
-    def __init__(self, num=0, den=1):
+    def __init__(self, num: int = 0, den: int = 1):
         """This builds a fraction based on some numerator and denominator.
 
-        PRE : - a numerator int
-              - a denominator int greater than zero
+        PRE : - Den (for Denominator) : integer
+              - Num (for Numerator): integer
         POST : - a object of type Fraction
         RAISES : ZeroDivisionError if the denominator is equal to 0
         """
@@ -37,7 +37,7 @@ class Fraction:
         """Return a textual representation of the reduced form of the fraction
 
         PRE : /
-        POST : a string that represents the reduced of the fraction
+        POST : String which represents the most reduced form of the fraction
         """
         if self.__den == 1:
             return "The reduced form of the fraction is " + str(self.__num)
@@ -67,7 +67,7 @@ class Fraction:
 
     # ------------------ Operators overloading ------------------
 
-    def __add__(self, other):
+    def __add__(self, other: "Fraction"):
         """Overloading of the + operator for fractions
 
          PRE : /
@@ -77,7 +77,7 @@ class Fraction:
         new_den = self.__den * other.__den
         return Fraction(new_num, new_den)
 
-    def __sub__(self, other):
+    def __sub__(self, other: "Fraction"):
         """Overloading of the - operator for fractions
 
         PRE : /
@@ -87,7 +87,7 @@ class Fraction:
         new_den = self.__den * other.__den
         return Fraction(new_num, new_den)
 
-    def __mul__(self, other):
+    def __mul__(self, other: "Fraction"):
         """Overloading of the * operator for fractions
 
         PRE : /
@@ -97,17 +97,18 @@ class Fraction:
         new_den = self.__den * other.__den
         return Fraction(new_num, new_den)
 
-    def __truediv__(self, other):
+    def __truediv__(self, other: "Fraction"):
         """Overloading of the / operator for fractions
 
-        PRE : /
+        PRE : other is an integer
         POST : Receives a new fraction whose value is the division of self and other
+        RAISES : ZeroDivisionError if the other numerator is equal to 0
         """
         new_num = self.__num * other.__den
         new_den = self.__den * other.__num
         return Fraction(new_num, new_den)
 
-    def __pow__(self, other):
+    def __pow__(self, other: int):
         """Overloading of the ** operator for fractions
 
         PRE : /
@@ -121,7 +122,7 @@ class Fraction:
             new_den = self.__den ** other
             return Fraction(new_num, new_den)
 
-    def __eq__(self, other):
+    def __eq__(self, other: "Fraction"):
         """Overloading of the == operator for fractions
 
         PRE : /
@@ -174,7 +175,7 @@ class Fraction:
         """
         return self.__num == 1
 
-    def is_adjacent_to(self, other):
+    def is_adjacent_to(self, other: "Fraction"):
         """Check if two fractions differ by a unit fraction
 
         Two fractions are adjacents if the absolute value of the difference them is a unit fraction
